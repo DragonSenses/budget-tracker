@@ -45,7 +45,7 @@ function addTransaction(e) {
     const transaction = {
       id: generateID(),
       text: text.value,
-      amount: amount.value
+      amount: +amount.value
     };
     
     console.log(transaction); 
@@ -104,6 +104,8 @@ function updateValues() {
   // Loop through the transactions array and create a new array with only amounts
   const amounts = transactions.map(transaction => 
     transaction.amount);
+
+  console.log(amounts);
 
   // Reduce the array of amounts to a total, also set it to two decimal points
   const total = amounts
