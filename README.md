@@ -1,5 +1,5 @@
 # budget-tracker
- A budget tracking web app that displays the users balance, income, and expenses. Also tracks specific transactions which  dynamically reflects on the balance, income, and expenses. 
+ A budget tracking web app that displays the users balance, income, and expenses. Also displays the transaction history which dynamically updates the balance, income, and expenses when new transactions are added. 
 
 # Description
 
@@ -23,14 +23,12 @@ This app uses [local storage](https://developer.mozilla.org/en-US/docs/Web/API/W
 
 HTML5, CSS3, JavaScript
 
-------------------------TODO:---------------------
 # How to use
 
-1. **Create** a note by adding a title where *Name&mldr;* is located, and add your note text where *Start writing&mldr;* is located 
+1. **Create** a transaction by adding a name where *Transaction Name* is located, and add the Amount where *Enter amount...* is located 
 2. **Read** Notes
-3. **Update** the note by hovering over the top right of the field to see the control panel to `Edit` or `Delete`
-4. After pressing `Edit`, the note can be changed by typing into the fields highlighted with a different color, then go back to the control panel in the top right and press `Save`
-5. **Delete** a note by hovering over the top right of it and press `Delete` and a window message will pop up to confirm, then press `OK`
+3. **Update** the *Balance, Income, Expense and Transaction History* by adding another transaction or delete a transaction from *Transaction History*
+4. **Delete** a transaction by hovering over the transaction under the **Transaction History** and press `X` delete button that shows up to the left of it. **Be careful** as it deletes it immediately without confirmation. 
 
 # Instructions to run a local copy
 
@@ -61,4 +59,4 @@ To see the data being saved in ***Local Storage***
 
 *Note*: If you do not want data to be saved on your browser, try opening the app in "incognito" or "private browsing" so data will be cleared when the last "private" tab is closed
 
-* To assuage any privacy concerns, data are not saved in any other place other than your own local machine's web browser
+* To assuage any privacy concerns, data is not saved in any other place other than your own personal machine's web browser
