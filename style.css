@@ -28,6 +28,8 @@ body {
 h1 {
   letter-spacing: 1px;
   margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 h2 {
@@ -43,6 +45,8 @@ h3 {
 h4 {
   margin: 0;
   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
 }
 
 .inc-exp.container{
