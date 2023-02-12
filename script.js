@@ -23,6 +23,51 @@ const seed = [
 let transactions = seed;
 
 /**
+ * Generates a unique ID for the transaction. For now, simply generates the
+ * exact millisecond the transaction was created.
+ * @returns number that represents a unique ID
+ */
+function generateID(){
+  return new Date().getTime()
+}
+
+/**
+ * Adds the new transaction
+ * @param {Event} e event when user presses submit button 'Add Transaction'
+ */
+function addTransaction(e) {
+  // Prevent the event argument from actually submitting
+  e.preventDefault();
+
+  if(text.value.trim() === '' || amount.value.trim() === '') {
+    alert('Please add a Transaction Name and Amount');
+  } else {
+    const transaction = {
+      id: generateID(),
+      text: text.value,
+      amount: amount.value
+    };
+    
+    console.log(transaction); 
+
+    // Push transaction the to array
+    transactions.push(transaction);
+
+    // Add transaction to the DOM
+    addTransactionDOM(transaction);
+
+    // Update values of the Budget container
+    updateValues();
+
+    // Clear the input fields
+    text.value = '';
+    amount.value = '';
+  }
+
+}
+
+
+/**
  * Adds the transaction to the DOM
  * @param {*} transaction the amount of transaction (e.g, 20 or -10)
  */
@@ -51,16 +96,6 @@ function addTransactionDOM(transaction){
   list.appendChild(item);
 }
 
-/**
- * Initializes the app with seed data.
- */
-function init(){
-  // Clear out the list
-  list.innerHTML = ''; 
-
-  // For each transactions, add it as a list item and to the DOM
-  transactions.forEach(addTransactionDOM);
-}
 
 /**
  * Update the budget by calculating the balance, income, and expenses.
@@ -95,7 +130,20 @@ function updateValues() {
   console.log(`expense: ${expense}`);
 }
 
-updateValues();
+/**
+ * Initializes the app with seed data (found in user's localStorage).
+ */
+function init(){
+  // Clear out the list
+  list.innerHTML = ''; 
+
+  // For each transactions, add it as a list item and to the DOM
+  transactions.forEach(addTransactionDOM);
+  updateValues();
+}
 
 // Initialize the app
 init();
+
+/* Event Listeners */
+form.addEventListener('submit', addTransaction);
