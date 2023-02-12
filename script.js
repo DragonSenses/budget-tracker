@@ -47,8 +47,6 @@ function addTransaction(e) {
       text: text.value,
       amount: +amount.value
     };
-    
-    console.log(transaction); 
 
     // Push transaction the to array
     transactions.push(transaction);
@@ -105,8 +103,6 @@ function updateValues() {
   const amounts = transactions.map(transaction => 
     transaction.amount);
 
-  console.log(amounts);
-
   // Reduce the array of amounts to a total, also set it to two decimal points
   const total = amounts
     .reduce((acc, val) => (acc += val), 0)
@@ -127,9 +123,6 @@ function updateValues() {
   money_plus.innerHTML = `$${income}`;
   money_minus.innerHTML = `$${expense}`;
 
-  console.log(`total: \t${total}`);
-  console.log(`income:\t${income}`);
-  console.log(`expense: ${expense}`);
 }
 
 /**
