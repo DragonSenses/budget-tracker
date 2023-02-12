@@ -89,7 +89,7 @@ function addTransactionDOM(transaction){
   // Negative number has a minus sign, so wrap it with Math.abs to get only the magnitude
   item.innerHTML =  `
     ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span> 
-    <button class="delete-btn">X</button></li>
+    <button class="delete-btn" onclick="removeTransaction(${transaction.id})">X</button></li>
   `;
 
   // Add the list item to the DOM as list's child node
@@ -130,6 +130,18 @@ function updateValues() {
   console.log(`total: \t${total}`);
   console.log(`income:\t${income}`);
   console.log(`expense: ${expense}`);
+}
+
+/**
+ * Remove transaction by its ID from the DOM.
+ * @param {number} id the unique id of the transaction
+ */
+function removeTransaction(id){
+  // Filter out the transaction by its id and save it to the array
+  transactions = transactions.filter(transaction => transaction.id !== id);
+
+  // Reinitialize app after removal to update data on the page
+  init();
 }
 
 /**
