@@ -111,7 +111,30 @@ label {
 }
 
 .delete-btn {
-  background-color: #e74c3c;
+  /* Scarlet red with horange-red hue */
+  background-color: #FF2400;
+  border: 0;
+  color: white;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 2px 5px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  cursor: pointer;
+  /* Like a tag next to the transaction */
+  transform: translate(-110%, -50%);
+  opacity: 0;
+  /* Add a fade-in transition */
+  transition: opacity 0.3s ease;
+}
+
+.list li:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:focus {
+  outline: 0;
 }
 
 input[type='text'], input[type='number']{
@@ -151,3 +174,6 @@ input[type='text'], input[type='number']{
   transform: scale(1.05) rotate(-1deg);
 }
 
+.btn:focus {
+  outline: 0;
+}
