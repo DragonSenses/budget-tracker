@@ -8,19 +8,14 @@ const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
 
-/* Create an array that has the initial set of data */
-const seed = [
-  { id: 1, text: 'Book', amount: -20 },
-  { id: 2, text: 'Salary', amount: 1000},
-  { id: 3, text: 'Food', amount: -450},
-  { id: 4, text: 'Essentials', amount: -240},
-  { id: 5, text: 'Gift', amount: 100}
-];
+/* Array of transactions found on the user's browser.
+A stringified array is returned, so needs to be converted via JSON.parse() */
+const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));
 
-// soon will add the seed associated with user's local storage
-
-/* Transactions is the array of objects that each stores id, text, and amount */
-let transactions = seed;
+/* Transactions is the array of objects that each stores id, text, and amount.
+Extract from user's localStorage if it exists, otherwise an empty array. */
+let transactions = 
+  localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
 
 /**
  * Generates a unique ID for the transaction. For now, simply generates the
@@ -28,7 +23,7 @@ let transactions = seed;
  * @returns number that represents a unique ID
  */
 function generateID(){
-  return new Date().getTime()
+  return new Date().getTime();
 }
 
 /**
@@ -56,6 +51,9 @@ function addTransaction(e) {
 
     // Update values of the Budget container
     updateValues();
+
+    // Sets the transaction in user's localStorage so data persists
+    updateLocalStorage();
 
     // Clear the input fields
     text.value = '';
@@ -122,7 +120,6 @@ function updateValues() {
   balance.innerHTML = `$${total}`;
   money_plus.innerHTML = `$${income}`;
   money_minus.innerHTML = `$${expense}`;
-
 }
 
 /**
@@ -133,8 +130,18 @@ function removeTransaction(id){
   // Filter out the transaction by its id and save it to the array
   transactions = transactions.filter(transaction => transaction.id !== id);
 
+  // Sets the transaction in user's localStorage so data persists
+  updateLocalStorage();
+
   // Reinitialize app after removal to update data on the page
   init();
+}
+
+/**
+ * Updates the localStorage on the user's browser with new transactions
+ */
+function updateLocalStorage(){
+  localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 
 /**
