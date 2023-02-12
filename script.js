@@ -1,3 +1,5 @@
+"use strict";
+
 const balance = document.getElementById('balance');
 const money_plus = document.getElementById('money-plus');
 const money_minus = document.getElementById('money-minus');
@@ -16,6 +18,8 @@ const seed = [
 ];
 
 // soon will add the seed associated with user's local storage
+
+/* Transactions is the array of objects that each stores id, text, and amount */
 let transactions = seed;
 
 /**
@@ -58,4 +62,40 @@ function init(){
   transactions.forEach(addTransactionDOM);
 }
 
+/**
+ * Update the budget by calculating the balance, income, and expenses.
+ */
+function updateValues() {
+  // Loop through the transactions array and create a new array with only amounts
+  const amounts = transactions.map(transaction => 
+    transaction.amount);
+
+  // Reduce the array of amounts to a total, also set it to two decimal points
+  const total = amounts
+    .reduce((acc, val) => (acc += val), 0)
+    .toFixed(2);
+  
+  // Get the income
+  const income = amounts
+    .filter((transaction) => transaction > 0)
+    .reduce((acc, val) => (acc += val), 0)
+    .toFixed(2);
+
+  const expense = amounts
+    .filter((transaction) => transaction < 0)
+    .reduce((acc, val) => (acc += val), 0)
+    .toFixed(2);
+
+  balance.innerHTML = `$${total}`;
+  money_plus.innerHTML = `$${income}`;
+  money_minus.innerHTML = `$${expense}`;
+
+  console.log(`total: \t${total}`);
+  console.log(`income:\t${income}`);
+  console.log(`expense: ${expense}`);
+}
+
+updateValues();
+
+// Initialize the app
 init();
